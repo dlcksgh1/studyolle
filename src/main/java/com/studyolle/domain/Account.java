@@ -5,6 +5,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Entity
 @Getter @Setter @EqualsAndHashCode(of = "id")
@@ -16,8 +17,10 @@ public class Account {
 
     @Column(unique = true)
     private String email;
+
     @Column(unique = true)
     private String nickname;
+
     private String password;
     private Boolean emailVerified;
     private String emailCheckToken;
@@ -29,10 +32,15 @@ public class Account {
 
     @Lob @Basic(fetch = FetchType.EAGER)
     private String profileImage;
+
     private boolean studyCreateByEmail;
     private boolean studyCreateByWeb;
     private boolean studyEnrollmentResultByEmail;
     private boolean studyEnrollmentResultByWeb;
     private boolean studyUpdateByEmail;
     private boolean studyUpdateByWeb;
+
+    public void generateToken() {
+        this.emailCheckToken = UUID.randomUUID().toString();
+    }
 }
