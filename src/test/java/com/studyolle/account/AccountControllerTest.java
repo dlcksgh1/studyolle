@@ -1,5 +1,6 @@
 package com.studyolle.account;
 
+import com.studyolle.domain.Account;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,14 +62,15 @@ class AccountControllerTest {
         mockMvc.perform(post("/sign-up")
                         .param("nickname", "nickname")
                         .param("email", "test@gmail.com")
-                        .param("password", "123445678")
+                        .param("password", "12345678")
                         .with(csrf()))
                 .andDo(print())
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/"));
 
-        assertTrue(accountRepository.existsByEmail("test@gmail.com"));
-
+        Account account =  accountRepository.findByEmail("test@gmail.com");
+        assertNotNull(account);
+        assertNotEquals(account.getPassword(), "12345678");
         then(javaMailSender).should().send(any(SimpleMailMessage.class));
 
     }
