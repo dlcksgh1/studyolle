@@ -46,7 +46,7 @@ public class AccountController {
 
 
     @GetMapping("/check-email-token")
-    public String verifyEmail(String token, String email, Model model) {
+    public String checkEmailToken(String token, String email, Model model) {
         Account account = accountService.findAccountByEmail(email);
         String view = "account/checked-email";
         if (account == null) {
