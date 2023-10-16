@@ -49,11 +49,11 @@ tasks.named('test') {
 node {
 	version = '18.18.2'
 	download = true
-	nodeModuleDir = file("${projectDir}/src/main/resources/static")
+	nodeModulesDir = file("${projectDir}/src/main/resources/static")
 }
 
-task copyFrontLib(type : Copy) {
-	from "${projectDir}/src/main/resource/static"
+task copyFrontLib(type: Copy) {
+	from "${projectDir}/src/main/resources/static"
 	into "${projectDir}/build/resources/main/static/."
 }
 
