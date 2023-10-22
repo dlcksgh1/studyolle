@@ -21,7 +21,7 @@ import java.util.List;
 public class AccountService {
 
     private final AccountRepository accountRepository;
-    private final JavaMailSender javaMailSender;
+    private final JavaMailSender mailSender;
     private final PasswordEncoder passwordEncoder;
 
     @Transactional
@@ -45,13 +45,13 @@ public class AccountService {
         return newAccount;
     }
 
-    private void sendSignUpConfirmEmail(Account newAccount) {
+    public void sendSignUpConfirmEmail(Account newAccount) {
         SimpleMailMessage mailMessage = new SimpleMailMessage();
         mailMessage.setTo(newAccount.getEmail());
         mailMessage.setSubject("스터디 올래, 회원 가입 인증");
         mailMessage.setText("/check-email-token?token=" + newAccount.getEmailCheckToken() +
                 "&email=" + newAccount.getEmail());
-        javaMailSender.send(mailMessage);
+        mailSender.send(mailMessage);
     }
 
     public Account findAccountByEmail(String email) {
@@ -66,4 +66,5 @@ public class AccountService {
         SecurityContext context = SecurityContextHolder.getContext();
         context.setAuthentication(token);
     }
+
 }
