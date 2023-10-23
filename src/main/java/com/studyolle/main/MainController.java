@@ -15,6 +15,11 @@ public class MainController {
             model.addAttribute(account);
         }
 
-        return  "index";
+        return "index";
+    }
+
+    @GetMapping("/login")
+    public String login() {
+        return "login";
     }
 }
