@@ -27,7 +27,7 @@ public class Account {
     private LocalDateTime joinedAt;
     private String bio;
     private String url;
-    private String Occupation;
+    private String occupation;
     private String location;
 
     @Lob @Basic(fetch = FetchType.EAGER)
