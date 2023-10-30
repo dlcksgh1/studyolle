@@ -94,15 +94,13 @@ public class AccountService implements UserDetailsService {
 
     public void updateProfile(Account account, Profile profile) {
 
-       /* Account saveAccount = accountRepository.findByNickname(account.getNickname());
+        Account saveAccount = accountRepository.findByNickname(account.getNickname()); // 변경감지사용
         saveAccount.setUrl(profile.getUrl());
         saveAccount.setOccupation(profile.getOccupation());
         saveAccount.setLocation(profile.getLocation());
-        saveAccount.setBio(profile.getBio());*/
-        account.setUrl(profile.getUrl());
-        account.setOccupation(profile.getOccupation());
-        account.setLocation(profile.getLocation());
-        account.setBio(profile.getBio());
-        accountRepository.save(account);
+        saveAccount.setBio(profile.getBio());
+        saveAccount.setProfileImage(profile.getProfileImage());
+        login(saveAccount);
+
     }
 }
