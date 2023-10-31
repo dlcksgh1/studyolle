@@ -33,12 +33,12 @@ public class Account {
     @Lob @Basic(fetch = FetchType.EAGER)
     private String profileImage;
 
-    private boolean studyCreateByEmail;
-    private boolean studyCreateByWeb;
+    private boolean studyCreatedByEmail;
+    private boolean studyCreatedByWeb;
     private boolean studyEnrollmentResultByEmail;
     private boolean studyEnrollmentResultByWeb;
-    private boolean studyUpdateByEmail;
-    private boolean studyUpdateByWeb;
+    private boolean studyUpdatedByEmail;
+    private boolean studyUpdatedByWeb;
 
     private LocalDateTime emailCheckTokenGeneratedAt;
 

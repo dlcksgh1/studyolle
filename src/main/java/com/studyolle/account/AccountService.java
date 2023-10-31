@@ -1,8 +1,10 @@
 package com.studyolle.account;
 
 import com.studyolle.domain.Account;
+import com.studyolle.setting.Notifications;
 import com.studyolle.setting.Profile;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -29,6 +31,7 @@ public class AccountService implements UserDetailsService {
     private final AccountRepository accountRepository;
     private final JavaMailSender mailSender;
     private final PasswordEncoder passwordEncoder;
+    private final ModelMapper modelMapper;
 
     public Account processNewAccount(SignUpForm signUpForm) {
         Account newAccount = saveNewAccount(signUpForm);
@@ -42,8 +45,8 @@ public class AccountService implements UserDetailsService {
                 .email(signUpForm.getEmail())
                 .nickname(signUpForm.getNickname())
                 .password(passwordEncoder.encode(signUpForm.getPassword()))
-                .studyCreateByWeb(true)
-                .studyUpdateByWeb(true)
+                .studyCreatedByWeb(true)
+                .studyUpdatedByWeb(true)
                 .studyEnrollmentResultByWeb(true)
                 .build();
         Account newAccount = accountRepository.save(account);
@@ -95,12 +98,25 @@ public class AccountService implements UserDetailsService {
     public void updateProfile(Account account, Profile profile) {
 
         Account saveAccount = accountRepository.findByNickname(account.getNickname()); // 변경감지사용
-        saveAccount.setUrl(profile.getUrl());
+/*        saveAccount.setUrl(profile.getUrl());
         saveAccount.setOccupation(profile.getOccupation());
         saveAccount.setLocation(profile.getLocation());
         saveAccount.setBio(profile.getBio());
-        saveAccount.setProfileImage(profile.getProfileImage());
+        saveAccount.setProfileImage(profile.getProfileImage());*/
+        modelMapper.map(profile,saveAccount);
         login(saveAccount);
 
+    }
+
+    public void updatePassword(Account account, String newPassword) {
+        Account saveAccount = accountRepository.findByNickname(account.getNickname()); // 변경감지사용
+        saveAccount.setPassword(passwordEncoder.encode(newPassword));
+        login(saveAccount);
+    }
+
+    public void updateNotifications(Account account, Notifications notifications) {
+        Account saveAccount = accountRepository.findByNickname(account.getNickname()); // 변경감지사용
+        modelMapper.map(notifications, saveAccount);
+        login(saveAccount);
     }
 }
