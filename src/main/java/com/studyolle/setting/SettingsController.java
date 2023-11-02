@@ -24,7 +24,7 @@ public class SettingsController {
     static final String SETTINGS_PROFILE_URL = "/" + SETTINGS_PROFILE_VIEW_NAME;
     static final String SETTINGS_PASSWORD_VIEW_NAME = "settings/password";
     static final String SETTINGS_PASSWORD_URL = "/" + SETTINGS_PASSWORD_VIEW_NAME;
-    static final String SETTINGS_NOTIFICATION_VIEW_NAME = "settings/notification";
+    static final String SETTINGS_NOTIFICATION_VIEW_NAME = "settings/notifications";
     static final String SETTINGS_NOTIFICATION_URL = "/" + SETTINGS_NOTIFICATION_VIEW_NAME;
 
     private final AccountService accountService;
@@ -38,7 +38,7 @@ public class SettingsController {
     @GetMapping(SETTINGS_PROFILE_URL)
     public String updateProfileForm(@CurrentUser Account account, Model model) {
         model.addAttribute(account);
-        model.addAttribute(new Profile(account));
+        model.addAttribute(modelMapper.map(account, Profile.class));
 
         return SETTINGS_PROFILE_VIEW_NAME;
     }
@@ -58,7 +58,7 @@ public class SettingsController {
     @GetMapping(SETTINGS_PASSWORD_URL)
     public String updatePasswordForm(@CurrentUser Account account, Model model) {
         model.addAttribute(account);
-        model.addAttribute(modelMapper.map(account, Profile.class));
+        model.addAttribute(new PasswordForm());
         return SETTINGS_PASSWORD_VIEW_NAME;
     }
 
