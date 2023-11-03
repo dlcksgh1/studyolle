@@ -1,5 +1,6 @@
-package com.studyolle.setting;
+package com.studyolle.setting.validator;
 
+import com.studyolle.setting.form.PasswordForm;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
