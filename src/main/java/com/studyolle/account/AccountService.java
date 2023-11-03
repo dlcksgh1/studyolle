@@ -1,8 +1,8 @@
 package com.studyolle.account;
 
 import com.studyolle.domain.Account;
-import com.studyolle.setting.Notifications;
-import com.studyolle.setting.Profile;
+import com.studyolle.setting.form.Notifications;
+import com.studyolle.setting.form.Profile;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.mail.SimpleMailMessage;
@@ -19,9 +19,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.validation.Valid;
-import java.security.Security;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -117,6 +115,12 @@ public class AccountService implements UserDetailsService {
     public void updateNotifications(Account account, Notifications notifications) {
         Account saveAccount = accountRepository.findByNickname(account.getNickname()); // 변경감지사용
         modelMapper.map(notifications, saveAccount);
+        login(saveAccount);
+    }
+
+    public void updateNickname(Account account, String nickname) {
+        Account saveAccount = accountRepository.findByNickname(account.getNickname()); // 변경감지사용
+        saveAccount.setNickname(nickname);
         login(saveAccount);
     }
 }
