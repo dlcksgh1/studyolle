@@ -5,6 +5,8 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -41,6 +43,9 @@ public class Account {
     private boolean studyUpdatedByWeb;
 
     private LocalDateTime emailCheckTokenGeneratedAt;
+
+    @OneToMany(mappedBy = "tag")
+    private List<AccountTag> accountTags = new ArrayList<>();
 
     public void generateToken() {
         this.emailCheckToken = UUID.randomUUID().toString();
