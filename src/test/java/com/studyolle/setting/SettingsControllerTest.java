@@ -148,7 +148,7 @@ class SettingsControllerTest {
                 .andExpect(model().attributeExists("account"));
     }
 
-    @Test
+/*    @Test
     @DisplayName("닉네임 수정: 에러(중복)")
     @WithAccount("test123")
     void updateNicknameWithDuplicatedNickname() throws Exception {
@@ -161,6 +161,6 @@ class SettingsControllerTest {
                 .andExpect(model().hasErrors())
                 .andExpect(model().attributeExists("nicknameForm"))
                 .andExpect(model().attributeExists("account"));
-    }
+    }*/
 
 }

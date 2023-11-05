@@ -5,10 +5,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 @Entity
 @Getter @Setter @EqualsAndHashCode(of = "id")
@@ -37,16 +34,16 @@ public class Account {
     private String profileImage;
 
     private boolean studyCreatedByEmail;
-    private boolean studyCreatedByWeb;
+    private boolean studyCreatedByWeb = true;
     private boolean studyEnrollmentResultByEmail;
-    private boolean studyEnrollmentResultByWeb;
+    private boolean studyEnrollmentResultByWeb = true;
     private boolean studyUpdatedByEmail;
-    private boolean studyUpdatedByWeb;
+    private boolean studyUpdatedByWeb  = true;
 
     private LocalDateTime emailCheckTokenGeneratedAt;
 
     @ManyToMany
-    private Set<Tag> Tags;
+    private Set<Tag> Tags = new HashSet<>();
 
     public void generateToken() {
         this.emailCheckToken = UUID.randomUUID().toString();
