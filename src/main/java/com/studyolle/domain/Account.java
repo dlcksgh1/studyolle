@@ -7,6 +7,7 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -44,8 +45,8 @@ public class Account {
 
     private LocalDateTime emailCheckTokenGeneratedAt;
 
-    @OneToMany(mappedBy = "tag")
-    private List<AccountTag> accountTags = new ArrayList<>();
+    @ManyToMany
+    private Set<Tag> Tags;
 
     public void generateToken() {
         this.emailCheckToken = UUID.randomUUID().toString();
