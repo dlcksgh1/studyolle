@@ -96,4 +96,23 @@ class StudyControllerTest {
                 .andExpect(view().name("study/form"))
                 .andExpect(model().hasErrors());
     }
+
+    @Test
+    @DisplayName("스터디 뷰")
+    @WithAccount("test123")
+    void studyView() throws Exception {
+        Account account = accountRepository.findByNickname("test123");
+        String studyPath = "study-path";
+        studyService.createNewStudy(modelMapper.map(StudyForm.builder()
+                .path(studyPath)
+                .title("study-title")
+                .shortDescription("short-description")
+                .fullDescription("full-description")
+                .build(), Study.class), account);
+        mockMvc.perform(get("/study/" + studyPath))
+                .andExpect(status().isOk())
+                .andExpect(view().name("study/view"))
+                .andExpect(model().attributeExists("account"))
+                .andExpect(model().attributeExists("study"));
+    }
 }
