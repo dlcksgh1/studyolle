@@ -65,4 +65,8 @@ public class Account {
     public boolean enableToSendEmail() {
         return this.emailCheckTokenGeneratedAt.isBefore(LocalDateTime.now().minusMinutes(5));
     }
+
+    public boolean isManagerOf(Study study) {
+        return study.getManagers().contains(this);
+    }
 }
