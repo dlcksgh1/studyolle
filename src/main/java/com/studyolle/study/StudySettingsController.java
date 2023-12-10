@@ -52,12 +52,7 @@ public class StudySettingsController {
         return "redirect:/study/" + study.getEncodedPath() + "/settings/description";
     }
 
-
-
-
-
-
-/*    @GetMapping("/banner")
+    @GetMapping("/banner")
     public String studyImageForm(@CurrentUser Account account, @PathVariable String path, Model model) {
         Study study = studyService.getStudyToUpdate(account, path);
         model.addAttribute(account);
@@ -66,7 +61,7 @@ public class StudySettingsController {
     }
 
     @PostMapping("/banner")
-    public String studyImageSubmit(@CurrentAccount Account account, @PathVariable String path,
+    public String studyImageSubmit(@CurrentUser Account account, @PathVariable String path,
                                    String image, RedirectAttributes attributes) {
         Study study = studyService.getStudyToUpdate(account, path);
         studyService.updateStudyImage(study, image);
@@ -75,16 +70,16 @@ public class StudySettingsController {
     }
 
     @PostMapping("/banner/enable")
-    public String enableStudyBanner(@CurrentAccount Account account, @PathVariable String path) {
+    public String enableStudyBanner(@CurrentUser Account account, @PathVariable String path) {
         Study study = studyService.getStudyToUpdate(account, path);
         studyService.enableStudyBanner(study);
         return "redirect:/study/" + study.getEncodedPath() + "/settings/banner";
     }
 
     @PostMapping("/banner/disable")
-    public String disableStudyBanner(@CurrentAccount Account account, @PathVariable String path) {
+    public String disableStudyBanner(@CurrentUser Account account, @PathVariable String path) {
         Study study = studyService.getStudyToUpdate(account, path);
         studyService.disableStudyBanner(study);
         return "redirect:/study/" + study.getEncodedPath() + "/settings/banner";
-    }*/
+    }
 }
