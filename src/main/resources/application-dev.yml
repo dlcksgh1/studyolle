@@ -1,4 +1,8 @@
 spring:
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
   datasource:
     username: testuser
     password: testpass
@@ -32,3 +36,4 @@ app:
 server:
   tomcat:
     max-http-form-post-size: 5MB
+
