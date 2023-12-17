@@ -23,7 +23,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @Transactional
 @AutoConfigureMockMvc
-class StudyControllerTest {
+public class StudyControllerTest {
 
     @Autowired MockMvc mockMvc;
     @Autowired AccountRepository accountRepository;
@@ -133,5 +133,21 @@ class StudyControllerTest {
                 .andExpect(view().name("study/members"))
                 .andExpect(model().attributeExists("account"))
                 .andExpect(model().attributeExists("study"));
+    }
+
+
+    public Study createStudy(String path, Account manager) {
+        Study study = new Study();
+        study.setPath(path);
+        studyService.createNewStudy(study, manager);
+        return study;
+    }
+
+    public Account createAccount(String nickname) {
+        Account whiteship = new Account();
+        whiteship.setNickname(nickname);
+        whiteship.setEmail(nickname + "@email.com");
+        accountRepository.save(whiteship);
+        return whiteship;
     }
 }
