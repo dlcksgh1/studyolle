@@ -144,10 +144,10 @@ public class StudyControllerTest {
     }
 
     public Account createAccount(String nickname) {
-        Account whiteship = new Account();
-        whiteship.setNickname(nickname);
-        whiteship.setEmail(nickname + "@email.com");
-        accountRepository.save(whiteship);
-        return whiteship;
+        Account account = new Account();
+        account.setNickname(nickname);
+        account.setEmail(nickname + "@email.com");
+        accountRepository.save(account);
+        return account;
     }
 }
