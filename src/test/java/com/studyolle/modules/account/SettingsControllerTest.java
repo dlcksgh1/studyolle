@@ -1,6 +1,7 @@
 package com.studyolle.modules.account;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.studyolle.infra.MockMvcTest;
 import com.studyolle.modules.tag.Tag;
 import com.studyolle.modules.zone.Zone;
 import com.studyolle.modules.account.form.TagForm;
@@ -25,9 +26,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@SpringBootTest
-@AutoConfigureMockMvc
-@Transactional
+@MockMvcTest
 class SettingsControllerTest {
 
     @Autowired

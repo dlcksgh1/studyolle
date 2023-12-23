@@ -1,5 +1,7 @@
 package com.studyolle.modules.study;
 
+import com.studyolle.infra.MockMvcTest;
+import com.studyolle.modules.account.AccountFactory;
 import com.studyolle.modules.account.WithAccount;
 import com.studyolle.modules.account.AccountRepository;
 import com.studyolle.modules.account.Account;
@@ -19,17 +21,13 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@SpringBootTest
-@Transactional
-@AutoConfigureMockMvc
+@MockMvcTest
 public class StudyControllerTest {
 
     @Autowired MockMvc mockMvc;
     @Autowired AccountRepository accountRepository;
-    @Autowired
-    StudyRepository studyRepository;
-    @Autowired
-    StudyService studyService;
+    @Autowired StudyRepository studyRepository;
+    @Autowired StudyService studyService;
     @Autowired ModelMapper modelMapper;
 
     @Test
@@ -137,18 +135,4 @@ public class StudyControllerTest {
     }
 
 
-    public Study createStudy(String path, Account manager) {
-        Study study = new Study();
-        study.setPath(path);
-        studyService.createNewStudy(study, manager);
-        return study;
-    }
-
-    public Account createAccount(String nickname) {
-        Account account = new Account();
-        account.setNickname(nickname);
-        account.setEmail(nickname + "@email.com");
-        accountRepository.save(account);
-        return account;
-    }
 }

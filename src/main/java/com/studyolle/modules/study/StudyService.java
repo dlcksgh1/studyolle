@@ -28,9 +28,7 @@ public class StudyService {
 
     public Study getStudyToUpdate(Account account, String path) {
         Study study = this.getStudy(path);
-        if (!study.isManagerBy(account)) {
-            throw new AccessDeniedException("해당 기능을 사용할 수 없습니다.");
-        }
+        checkIfManager(account, study);
         return study;
     }
 

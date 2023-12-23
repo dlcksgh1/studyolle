@@ -1,6 +1,7 @@
 package com.studyolle.modules.study;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.studyolle.infra.MockMvcTest;
 import com.studyolle.modules.account.WithAccount;
 import com.studyolle.modules.account.AccountRepository;
 import com.studyolle.modules.account.Account;
@@ -30,9 +31,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@SpringBootTest
-@Transactional
-@AutoConfigureMockMvc
+@MockMvcTest
 class StudySettingsControllerTest {
 
     @Autowired MockMvc mockMvc;
@@ -41,22 +40,18 @@ class StudySettingsControllerTest {
     StudyRepository studyRepository;
     @Autowired
     StudyService studyService;
-    private final String studyPath = "study-test";
+    private final String studyPath = "test-study";
     @Autowired ModelMapper modelMapper;
     @Autowired ObjectMapper objectMapper;
     @Autowired TagService tagService;
     @Autowired TagRepository tagRepository;
     @Autowired ZoneRepository zoneRepository;
+    @Autowired StudyFactory studyFactory;
 
     @BeforeEach
     void beforeEach() {
         Account account = accountRepository.findByNickname("test123");
-        studyService.createNewStudy(modelMapper.map(StudyForm.builder()
-                .path(studyPath)
-                .title("study-title")
-                .shortDescription("short-description")
-                .fullDescription("full-description")
-                .build(), Study.class), account);
+        Study study = studyFactory.createStudy("test-study", account);
     }
 
     @AfterEach
@@ -67,7 +62,7 @@ class StudySettingsControllerTest {
     @Test
     @DisplayName("스터디 세팅 폼 조회")
     @WithAccount("test123")
-    void studyForm() throws Exception {
+    void studySettingFormDescription() throws Exception {
         mockMvc.perform(get("/study/" + studyPath + "/settings/description"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("study/settings/description"))
