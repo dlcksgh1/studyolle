@@ -1,5 +1,6 @@
 package com.studyolle;
 
+import com.studyolle.infra.AbstractContainerBaseTest;
 import com.tngtech.archunit.core.domain.JavaClasses;
 import com.tngtech.archunit.core.importer.ClassFileImporter;
 import com.tngtech.archunit.junit.AnalyzeClasses;
@@ -11,7 +12,7 @@ import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.classes;
 import static com.tngtech.archunit.library.dependencies.SlicesRuleDefinition.slices;
 
 @AnalyzeClasses(packagesOf = StudyolleApplication.class)
-public class PackageDependencyTests {
+public class PackageDependencyTests extends AbstractContainerBaseTest {
 
     private static final String STUDY = "..modules.study..";
     private static final String EVENT = "..modules.event..";
