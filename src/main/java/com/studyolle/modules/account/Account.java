@@ -48,7 +48,7 @@ public class Account {
     private LocalDateTime emailCheckTokenGeneratedAt;
 
     @ManyToMany
-    private Set<Tag> Tags = new HashSet<>();
+    private Set<Tag> tags = new HashSet<>();
 
     @ManyToMany
     private Set<Zone> zones = new HashSet<>();
