@@ -6,8 +6,8 @@ import lombok.RequiredArgsConstructor;
 
 @Getter
 @RequiredArgsConstructor
-public class StudyCreatedEvent {
+public class StudyUpdateEvent {
 
     private final Study study;
-
+    private final String message;
 }
