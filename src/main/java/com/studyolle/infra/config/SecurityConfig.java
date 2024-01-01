@@ -27,7 +27,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests()
                 .mvcMatchers("/", "/sign-up", "/check-email-token",
-                        "/email-login", "check-email-login", "/login-link", "/login-by-email").permitAll()
+                        "/email-login", "check-email-login", "/login-link", "/login-by-email", "/search/study").permitAll()
                 .mvcMatchers(HttpMethod.GET, "/profile/*").permitAll()
                 .anyRequest().authenticated();
 
@@ -36,6 +36,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll();
         http.logout()
                 .logoutSuccessUrl("/");
+
         http.rememberMe()
                 .userDetailsService(userDetailsService)
                 .tokenRepository(tokenRepository());
