@@ -16,10 +16,14 @@ public class StudyRepositoryExtensionImpl extends QuerydslRepositorySupport impl
     @Override
     public List<Study> findByKeyword(String keyword) {
         QStudy study = QStudy.study;
-        JPQLQuery<Study> query = from(study).where(study.published.isTrue()
+        JPQLQuery<Study> query = from(study)
+                .where(study.published.isTrue()
                         .and(study.title.containsIgnoreCase(keyword))
                         .or(study.tags.any().title.containsIgnoreCase(keyword))
-                        .or(study.zones.any().localNameOfCity.containsIgnoreCase(keyword)));
+                        .or(study.zones.any().localNameOfCity.containsIgnoreCase(keyword)))
+                .leftJoin(study.tags, QTag.tag).fetchJoin()
+                .leftJoin(study.zones, QZone.zone).fetchJoin()
+                .distinct();
         return query.fetch();
     }
 }
