@@ -1,6 +1,7 @@
 package com.studyolle.modules.main;
 
 import com.studyolle.modules.account.Account;
+import com.studyolle.modules.account.AccountRepository;
 import com.studyolle.modules.account.CurrentUser;
 import com.studyolle.modules.study.Study;
 import com.studyolle.modules.study.StudyRepository;
@@ -20,6 +21,7 @@ import java.util.List;
 public class MainController {
 
     private final StudyRepository studyRepository;
+    private final AccountRepository accountRepository;
 
     @GetMapping("/")
     public String home(@CurrentUser Account account, Model model) {
@@ -27,6 +29,7 @@ public class MainController {
             model.addAttribute(account);
         }
 
+        model.addAttribute("studyList", studyRepository.findFirst9ByPublishedAndClosedOrderByPublishedDateTimeDesc(true, false));
         return "index";
     }
 
