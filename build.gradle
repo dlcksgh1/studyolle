@@ -8,7 +8,7 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '2.7.16'
 	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
-	id 'com.github.node-gradle.node' version '2.2.3'
+	id 'com.github.node-gradle.node' version '3.1.0'
 	id 'com.ewerk.gradle.plugins.querydsl' version '1.0.10'
 }
 
@@ -27,6 +27,7 @@ configurations {
 
 repositories {
 	mavenCentral()
+	gradlePluginPortal()
 }
 
 dependencies {
@@ -56,7 +57,7 @@ dependencies {
 	testRuntimeOnly 'org.junit.vintage:junit-vintage-engine'
 	testImplementation "org.testcontainers:postgresql:1.19.3"
 	testImplementation "org.testcontainers:junit-jupiter:1.19.3"
-
+	implementation  "com.github.node-gradle:gradle-node-plugin:3.1.0"
 
 }
 
@@ -67,13 +68,18 @@ tasks.named('test') {
 node {
 	version = '18.18.2'
 	download = true
-	nodeModulesDir = file("${projectDir}/src/main/resources/static")
+	npmVersion = ""
+	yarnVersion = ""
+	distBaseUrl = "https://nodejs.org/dist"
+	npmInstallCommand = "install"
+	workDir = file("${project.projectDir}/.gradle/nodejs")
+	npmWorkDir = file("${project.projectDir}/.gradle/npm")
+	yarnWorkDir = file("${project.projectDir}/.gradle/yarn")
+	nodeProjectDir = file("${project.projectDir}/src/main/resources/static")
+	nodeProxySettings = ProxySettings.SMART
 }
 
-task copyFrontLib(type: Copy) {
-	from "${projectDir}/src/main/resources/static"
-	into "${projectDir}/build/resources/main/static/."
-}
+processResources.dependsOn('npmInstall')
 
 def querydslDir = "$buildDir/generated/querydsl"
 
@@ -93,6 +99,3 @@ configurations {
 compileQuerydsl {
 	options.annotationProcessorPath = configurations.querydsl
 }
-
-copyFrontLib.dependsOn npmInstall
-compileJava.dependsOn copyFrontLib
