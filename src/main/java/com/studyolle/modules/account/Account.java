@@ -39,17 +39,22 @@ public class Account {
     private String profileImage;
 
     private boolean studyCreatedByEmail;
+    @Builder.Default
     private boolean studyCreatedByWeb = true;
     private boolean studyEnrollmentResultByEmail;
+    @Builder.Default
     private boolean studyEnrollmentResultByWeb = true;
     private boolean studyUpdatedByEmail;
+    @Builder.Default
     private boolean studyUpdatedByWeb  = true;
 
     private LocalDateTime emailCheckTokenGeneratedAt;
 
+    @Builder.Default
     @ManyToMany
     private Set<Tag> tags = new HashSet<>();
 
+    @Builder.Default
     @ManyToMany
     private Set<Zone> zones = new HashSet<>();
 
