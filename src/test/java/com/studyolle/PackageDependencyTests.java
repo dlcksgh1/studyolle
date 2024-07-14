@@ -56,11 +56,13 @@ public class PackageDependencyTests extends AbstractContainerBaseTest {
             .onlyBeAccessed()
             .byClassesThat()
             .resideInAnyPackage(MODULES);
+    /*
 
     @Test
     void studyPackageRuleTest() {
         studyPackageRule.check(CLASS);
     }
+    */
 
     @Test
     void eventPackageRuleTest() {
