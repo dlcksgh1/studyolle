@@ -16,7 +16,7 @@ plugins {
 sonar {
 	properties {
 		property "sonar.projectKey", "ci_cd_web_project_studyolle"
-		property "sonar.host.url", "http://15.165.66.152/:9000"
+		property "sonar.host.url", "http://172.17.0.3:9000"
 		property "sonar.login", "squ_60ab2b0004d2b082a94ac11b201c2558b024bb9f"
 	}
 }
