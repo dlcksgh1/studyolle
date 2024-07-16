@@ -21,6 +21,15 @@ sonarqube  {
 	}
 }
 
+test {
+    reports {
+        junitXml.enabled = true
+        junitXml.destination = file("${buildDir}/test-results/test")
+        html.enabled = true
+        html.destination = file("${buildDir}/reports/tests")
+    }
+}
+
 group = 'com.studyolle'
 version = '0.0.1-SNAPSHOT'
 
