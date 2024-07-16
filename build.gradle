@@ -13,24 +13,6 @@ plugins {
 	id "org.sonarqube" version "3.3"
 }
 
-sonarqube  {
-	properties {
-		property "sonar.projectKey", "ci_cd_web_project_studyolle"
-		property "sonar.host.url", "http://172.17.0.3:9000"
-		property "sonar.login", "squ_60ab2b0004d2b082a94ac11b201c2558b024bb9f"
-	}
-}
-
-test {
-    reports {
-        junitXml.enabled = true
-        junitXml.destination = file("${buildDir}/test-results/test")
-        html.enabled = true
-        html.destination = file("${buildDir}/reports/tests")
-    }
-}
-
-
 group = 'com.studyolle'
 version = '0.0.1-SNAPSHOT'
 
