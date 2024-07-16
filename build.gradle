@@ -17,7 +17,7 @@ sonarqube {
 	properties {
 		property "sonar.projectKey", "ci_cd_web_project_studyolle"
 		property "sonar.host.url", "http://15.165.66.152/:9000"
-		property "sonar.login", "squ_cfc1732e491a17cd94bf2e0ca0ac038dafd5b644"
+		property "sonar.login", "squ_60ab2b0004d2b082a94ac11b201c2558b024bb9f"
 	}
 }
 
