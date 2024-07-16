@@ -23,14 +23,10 @@ sonarqube  {
 
 test {
     reports {
-        junitXml {
-            enabled = true
-            destination = file("${buildDir}/test-results/test")
-        }
-        html {
-            enabled = true
-            destination = file("${buildDir}/reports/tests")
-        }
+        junitXml.enabled = true
+        junitXml.destination = file("${buildDir}/test-results/test")
+        html.enabled = true
+        html.destination = file("${buildDir}/reports/tests")
     }
 }
 
