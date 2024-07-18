@@ -64,6 +64,12 @@ dependencies {
 
 tasks.named('test') {
 	useJUnitPlatform()
+
+    	// JUnit XML Report 설정 수정
+	reports {
+		junitXml.required.set(true)
+		junitXml.outputLocation.set(file("$buildDir/test-results/test"))
+	}
 }
 
 node {
