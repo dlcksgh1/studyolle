@@ -88,11 +88,11 @@ dependencies {
 test {
 	useJUnitPlatform()
 	reports {
-	        junitXml.required.set(true)
-	        // junitXml.outputLocation expects a RegularFile, not a Directory
-	        junitXml.outputLocation.set(layout.buildDirectory.file('test-results/test.xml'))
+		junitXml.required.set(true)
+	        // junitXml.outputLocation expects a RegularFile
+	        junitXml.outputLocation.set(layout.buildDirectory.file('test-results/test-results.xml'))
 	        html.required.set(true)
-	        // html.outputLocation expects a Directory, so this is correct
+	        // html.outputLocation expects a Directory
 	        html.outputLocation.set(layout.buildDirectory.dir('test-results/test-html'))
 	}
 }
