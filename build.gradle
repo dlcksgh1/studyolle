@@ -27,6 +27,19 @@ sonarqube {
 	}
 }
 
+jacoco {
+    toolVersion = "0.8.8"
+    reportsDirectory = layout.buildDirectory.dir('customJacocoReportDir')
+}
+
+jacocoTestReport {
+    reports {
+        xml.required = false
+        csv.required = true
+        html.outputLocation = layout.buildDirectory.dir('jacocoHtml')
+    }
+}
+
 configurations {
 	compileOnly {
 		extendsFrom annotationProcessor
