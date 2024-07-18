@@ -37,9 +37,9 @@ tasks.jacocoTestReport {
     reports {
         xml.required.set(false)
         csv.required.set(true)
-        csv.outputLocation.set(layout.buildDirectory.file('jacoco/csv/jacocoTestReport.csv'))
+        csv.outputLocation.set(layout.buildDirectory.file('customJacocoReportDir/jacocoTestReport.csv'))
         html.required.set(true)
-        html.outputLocation.set(layout.buildDirectory.dir('jacocoHtml'))
+        html.outputLocation.set(layout.buildDirectory.dir('customJacocoReportDir/jacocoHtml'))
     }
 }
 
@@ -88,11 +88,11 @@ dependencies {
 test {
 	useJUnitPlatform()
 	reports {
-		junitXml.required.set(true)
-	        // junitXml.outputLocation expects a RegularFile
+	        junitXml.required.set(true)
+	        // Correct: setting a file for junitXml.outputLocation
 	        junitXml.outputLocation.set(layout.buildDirectory.file('test-results/test-results.xml'))
 	        html.required.set(true)
-	        // html.outputLocation expects a Directory
+	        // Correct: setting a directory for html.outputLocation
 	        html.outputLocation.set(layout.buildDirectory.dir('test-results/test-html'))
 	}
 }
