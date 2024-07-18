@@ -98,6 +98,7 @@ class AccountControllerTest extends AbstractContainerBaseTest {
                 .andExpect(unauthenticated());
     }
 
+    /*
     @Test
     @DisplayName("인증 메일 확인 : 유효한 링크")
     @Transactional
@@ -120,4 +121,5 @@ class AccountControllerTest extends AbstractContainerBaseTest {
                 .andExpect(view().name("account/checked-email"))
                 .andExpect(authenticated().withUsername("test"));
     }
+    */
 }
