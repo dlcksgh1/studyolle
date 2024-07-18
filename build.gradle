@@ -20,6 +20,13 @@ java {
 	sourceCompatibility = '11'
 }
 
+tasks.sonarqube {
+    properties {
+        property "sonar.host.url", "http://15.165.66.152:9000"  // SonarQube 서버 URL
+        property "sonar.login", "squ_f2564cfcb5f22d0312218d5a508f2521ead4240c"  // SonarQube 로그인 토큰
+    }
+}
+
 configurations {
 	compileOnly {
 		extendsFrom annotationProcessor
