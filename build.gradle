@@ -83,7 +83,7 @@ dependencies {
 
 }
 
-tasks.named('test') {
+test {
 	useJUnitPlatform()
 	reports {
         	junitXml.required.set(true)
