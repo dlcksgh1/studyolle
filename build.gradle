@@ -64,13 +64,16 @@ dependencies {
 
 tasks.named('test') {
 	useJUnitPlatform()
-
-    	// JUnit XML Report 설정 수정
+	
+									 
 	reports {
 		junitXml.required.set(true)
 		junitXml.outputLocation.set(file("$buildDir/test-results/test"))
+		html.required.set(true)
+		html.outputLocation.set(file("$buildDir/reports/tests"))
 	}
 }
+
 
 node {
 	version = '18.18.2'
