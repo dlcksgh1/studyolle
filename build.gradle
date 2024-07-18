@@ -35,9 +35,10 @@ jacoco {
 
 jacocoTestReport {
     reports {
-        xml.required = false
-        csv.required = true
-        html.outputLocation = layout.buildDirectory.dir('jacocoHtml')
+	junitXml.required.set(true)
+        junitXml.outputLocation.set(layout.buildDirectory.file('test-results/test'))
+        html.required.set(true)
+        html.outputLocation.set(layout.buildDirectory.dir('test-results/test-html'))
     }
 }
 
