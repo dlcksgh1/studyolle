@@ -29,18 +29,29 @@ sonarqube {
 }
 
 jacoco {
-    toolVersion = "0.8.8"
-    reportsDirectory = layout.buildDirectory.dir('customJacocoReportDir')
+	toolVersion = "0.8.8"
+	reportsDirectory = layout.buildDirectory.dir('customJacocoReportDir')
 }
 
 tasks.jacocoTestReport {
-    reports {
-        xml.required.set(false)
-        csv.required.set(true)
-        csv.outputLocation.set(layout.buildDirectory.file('customJacocoReportDir/jacocoTestReport.csv'))
-        html.required.set(true)
-        html.outputLocation.set(layout.buildDirectory.dir('customJacocoReportDir/jacocoHtml'))
-    }
+	reports {
+		xml.required.set(false)
+		csv.required.set(true)
+		csv.outputLocation.set(layout.buildDirectory.file('customJacocoReportDir/jacocoTestReport.csv'))
+		html.required.set(true)
+		html.outputLocation.set(layout.buildDirectory.dir('customJacocoReportDir/jacocoHtml'))
+	}
+}
+
+test {
+	useJUnitPlatform()
+	reports {
+		junitXml.required.set(true)
+		// Setting a directory for junitXml.outputLocation instead of a file
+		junitXml.outputLocation.set(layout.buildDirectory.dir('test-results/junitXml'))
+		html.required.set(true)
+		html.outputLocation.set(layout.buildDirectory.dir('test-results/test-html'))
+	}
 }
 
 configurations {
@@ -84,18 +95,6 @@ dependencies {
 	implementation  "com.github.node-gradle:gradle-node-plugin:3.1.0"
 
 }
-
-test {
-	useJUnitPlatform()
-	reports {
-		junitXml.required.set(true)
-		// Setting a directory for junitXml.outputLocation instead of a file
-		junitXml.outputLocation.set(layout.buildDirectory.dir('test-results/junitXml'))
-		html.required.set(true)
-		html.outputLocation.set(layout.buildDirectory.dir('test-results/test-html'))
-	}
-}
-
 
 node {
 	version = '18.18.2'
