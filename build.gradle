@@ -69,16 +69,8 @@ dependencies {
 
 }
 
-tasks.withType(Test) {
+tasks.named('test') {
 	useJUnitPlatform()
-	
-									 
-	reports {
-		junitXml.required.set(true)
-		junitXml.outputLocation.set(file("$buildDir/test-results/test"))
-		html.required.set(true)
-		html.outputLocation.set(file("$buildDir/reports/tests"))
-	}
 }
 
 
