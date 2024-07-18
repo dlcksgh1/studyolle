@@ -33,12 +33,13 @@ jacoco {
     reportsDirectory = layout.buildDirectory.dir('customJacocoReportDir')
 }
 
-jacocoTestReport {
+tasks.jacocoTestReport {
     reports {
-	junitXml.required.set(true)
-        junitXml.outputLocation.set(layout.buildDirectory.file('test-results/test'))
+        xml.required.set(false)
+        csv.required.set(true)
+        csv.outputLocation.set(layout.buildDirectory.file('jacoco/csv/jacocoTestReport.csv'))
         html.required.set(true)
-        html.outputLocation.set(layout.buildDirectory.dir('test-results/test-html'))
+        html.outputLocation.set(layout.buildDirectory.dir('jacocoHtml'))
     }
 }
 
@@ -87,9 +88,11 @@ dependencies {
 test {
 	useJUnitPlatform()
 	reports {
-        	junitXml.required.set(true)
-        	html.required.set(true)
-    	}
+		junitXml.required.set(true)
+		junitXml.outputLocation.set(layout.buildDirectory.file('test-results/test'))
+		html.required.set(true)
+		html.outputLocation.set(layout.buildDirectory.dir('test-results/test-html'))
+	}
 }
 
 
