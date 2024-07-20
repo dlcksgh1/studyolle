@@ -26,33 +26,30 @@ sonarqube {
 	properties {
 		property 'sonar.host.url', 'http://15.165.66.152:9000'  // SonarQube 서버 URL
 		property 'sonar.login', 'squ_f2564cfcb5f22d0312218d5a508f2521ead4240c'  // SonarQube 로그인 토큰
+		property "sonar.sources", "src"
+		property "sonar.language", "java"
+		property "sonar.sourceEncoding", "UTF-8"
+		property "sonar.profile", "Sonar way"
+		property "sonar.test.inclusions", "**/*Test.java"
+		property 'sonar.coverage.jacoco.xmlReportPaths', "${buildDir}/reports/jacoco/test/jacocoTestReport.xml"
 	}
 }
 
 jacoco {
-	toolVersion = "0.8.8"
-	reportsDirectory = layout.buildDirectory.dir('customJacocoReportDir')
+	toolVersion = "0.8.7"
 }
 
-tasks.jacocoTestReport {
+jacocoTestReport {
 	reports {
-		xml.required.set(false)
-		csv.required.set(true)
-		csv.outputLocation.set(layout.buildDirectory.file('customJacocoReportDir/jacocoTestReport.csv'))
-		html.required.set(true)
-		html.outputLocation.set(layout.buildDirectory.dir('customJacocoReportDir/jacocoHtml'))
+		xml.enabled true
+		csv.enabled false
+		html.enabled false
 	}
 }
 
 test {
 	useJUnitPlatform()
-	reports {
-		junitXml.required.set(true)
-		// Setting a directory for junitXml.outputLocation instead of a file
-		junitXml.outputLocation.set(layout.buildDirectory.dir('test-results/junitXml'))
-		html.required.set(true)
-		html.outputLocation.set(layout.buildDirectory.dir('test-results/test-html'))
-	}
+	finalizedBy 'jacocoTestReport'
 }
 
 configurations {
